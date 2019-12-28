@@ -1,8 +1,9 @@
 CREATE TABLE Klienci(
-    	IDKlient INT IDENTITY (1,1) CONSTRAINT klucz PRIMARY KEY,
-    	NazwaKlienta varchar(255),
+    	IDKlient INT NOT NULL,
+    	NazwaKlienta varchar(255) NOT NUL,
     	Andres varchar(255),
 	KodPocztowy varchar(6),
 	Miasto varchar(255),
-    Wojewodztwo varchar(255)
+    	Wojewodztwo varchar(255)
+    CONSTRAINT PK_Klienci PRIMARY KEY (IDKlient)
 );
