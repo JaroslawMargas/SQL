@@ -1,3 +1,7 @@
+﻿-- Normalizacja bazy danych
+-- Nadmiarowość, anomalie modyfikacji, dodawania / usuwania rekordów
+-- v.1.0 SQLpedia.pl Jakub Kasprzak 2013-01-15
+
 Insert into Klienci (NazwaKlienta,Adres,KodPocztowy,Miasto,Wojewodztwo)
   Values  ('Jan Kowalski','ul. Jana Pawła 12','61-600','Poznań','Wielkopolskie'),
 ('Anna Dymna','ul. Staszica 1','30-600','Kraków','Małopolskie'),
