@@ -1,0 +1,27 @@
+Insert into Klienci (NazwaKlienta,Adres,KodPocztowy,Miasto,Wojewodztwo)
+  Values  ('Jan Kowalski','ul. Jana Pawła 12','61-600','Poznań','Wielkopolskie'),
+('Anna Dymna','ul. Staszica 1','30-600','Kraków','Małopolskie'),
+('Piotr Wawrzyniak','al. Niepodległości 1','30-600','Kraków','Małopolskie'),
+('Jan Kowalski','ul. Poznańska 8','21-120','Wrocław','Dolnośląskie')
+
+Insert into Zamowienia (NumerZamowienia,IDKlient,DataZamowienia, WartZamNetto ,WartZamBrutto )
+Values  (101,1,'2012-01-02',1200, 1476.00 ),
+(102,2,'2012-03-22',2200, 2706.00),
+(103,3,'2012-03-22',2200, 2706.00),
+(104,1,'2012-10-22',80, 98.40),
+(105,4,'2012-05-22',15,18.45)
+
+Insert into DetaleZamowien ( NumerZamowienia, KodProduktu ,CenaJedn ,Ilosc)
+VALUES (101 , 1, 300 , 4),
+(102 , 2, 550 , 4),
+(103 , 2, 550 , 4),
+(104 , 3, 80 , 1),
+(105 , 4, 10 , 1),
+(106 , 5, 5, 1)
+
+Insert into Produkty (Nazwa,Producent,CenaJedn)
+Values ('Opony 205 R16','Pirelli',300),
+('Alufelgi Silver','ENZO',550),
+('Opony wymiana',NULL,80),
+('Płyn do spryskiwacza','GreenApple',10),
+('Trójkąt ostrzegawczy','GoSafer',5)
