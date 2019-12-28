@@ -1,0 +1,8 @@
+CREATE TABLE Klienci(
+    	IDKlient INT IDENTITY (1,1) CONSTRAINT klucz PRIMARY KEY,
+    	NazwaKlienta varchar(255),
+    	Andres varchar(255),
+	KodPocztowy varchar(6),
+	Miasto varchar(255),
+    Wojewodztwo varchar(255)
+);
