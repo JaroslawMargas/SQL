@@ -1,0 +1,209 @@
+﻿-- Normalizacja bazy danych
+-- Nadmiarowość, anomalie modyfikacji, dodawania / usuwania rekordów
+-- v.1.0 SQLpedia.pl Jakub Kasprzak 2013-01-15
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+-- Przykład tabeli łamiącej wszystkie zasady, punkt wyjścia do dyskusji o anomaliach.
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Create table #Zamowienia_UNF
+(
+	NumerZam int IDENTITY(101,1),
+	NazwaKlienta nvarchar(100),
+	AdresKlienta nvarchar(100),
+	DataZamowienia smalldatetime,
+	SzczegolyZamowienia varchar(1000)
+)
+
+insert into #Zamowienia_UNF(NazwaKlienta,AdresKlienta,DataZamowienia,SzczegolyZamowienia)
+Values  ('Jan Kowalski','ul. Jana Pawła 12, 61-600 Poznań, woj. Wielkopolskie','2012-01-02','Opony 205 R16 4szt, koszt 1200 PLN'),
+('Anna Dymna','ul. Staszica 1, 30-600 Kraków, Małopolska','2012-03-22','Alufelgi Silver 4 szt, koszt 2200 PLN'),
+('Piotr Wawrzyniak','al. Niepodległości 1, 30-600 Kraków, woj. Małopolskie','2012-03-22','Alufelgi Silver 4 szt, koszt 2200 PLN'),
+('Jan Kowalski','ul. Jana Pawła 12, 61-600 Poznań, woj. Wielkopolskie','2012-10-22','Komplet żarówek, koszt 80 PLN'),
+('Jan Kowalski','ul. Poznańska 8, 21-120 Wrocław, Dolnośląskie','2012-05-22','Płyn do spryskiwacza 1szt, Trójkąt ostrzegawczy 1szt, koszt 15 PLN')
+  
+select * from #Zamowienia_UNF
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------
+-- 1NF - atomowość oraz usunięcie kolekcji + jednoznaczne określenie każdego wierszu (unikalność)
+------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Create table #Zamowienia_1NF
+(
+	NrPozycji int IDENTITY(1,1),	
+	NumerZamowienia int, 
+	NazwaKlienta nvarchar(100),
+	Adres nvarchar(100),
+	KodPocztowy char(7),
+	Miasto varchar(100),
+	Wojewodztwo varchar(100),
+	DataZamowienia smalldatetime,
+	ElementZamowienia varchar(100),
+	Ilosc int,
+	CenaJedn money,
+	WartZamNetto money,
+	Vat tinyint,
+	WartZamBrutto money
+)
+
+insert into #Zamowienia_1NF(NumerZamowienia,NazwaKlienta,Adres,KodPocztowy,Miasto,Wojewodztwo,DataZamowienia,ElementZamowienia,Ilosc,CenaJedn,WartZamNetto,Vat,WartZamBrutto)
+Values  (101,'Jan Kowalski','ul. Jana Pawła 12','61-600','Poznań','Wielkopolskie','2012-01-02','Opony 205 R16',4,300,1200,23,1.23*1200),
+(102,'Anna Dymna','ul. Staszica 1','30-600','Kraków','Małopolskie','2012-03-22','Alufelgi Silver',4,550,2200,23,1.23*2200),
+(103,'Piotr Wawrzyniak','al. Niepodległości 1','30-600','Kraków','Małopolskie','2012-03-22','Alufelgi Silver',4,550,2200,23,1.23*2200),
+(104,'Jan Kowalski','ul. Jana Pawła 12','61-600','Poznań','Wielkopolskie','2012-10-22','Komplet żarówek',1,80,80,23,1.23*80),
+(105,'Jan Kowalski','ul. Poznańska 8','21-120','Wrocław','Dolnośląskie','2012-05-22','Płyn do spryskiwacza',1,10,15,23,1.23*15), 
+(105,'Jan Kowalski','ul. Poznańska 8','21-120','Wrocław','Dolnośląskie','2012-05-22','Trójkąt ostrzegawczy',1,5,15,23,1.23*15)
+  
+select * from #Zamowienia_UNF
+select * from #Zamowienia_1NF
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------
+----- 2NF likwidacja wszystkich atrybutów informacyjnych nienależących do encji zamowienia - stworzenie właściwych, osobnych encji (tabel)
+----- dla Klientów, detali zamówienia, Produktów
+------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+create table #Zamowienia_2NF
+(
+	NumerZamowienia  int,
+	IDKlient int,
+	DataZamowienia smalldatetime,
+	WartZamNetto money,
+	Vat tinyint,
+	WartZamBrutto money
+)
+
+Insert into #Zamowienia_2NF(NumerZamowienia,IDKlient,DataZamowienia,WartZamNetto,Vat,WartZamBrutto)
+Values  (101,1,'2012-01-02',1200,23,1200*1.23),
+(102,2,'2012-03-22',2200,23,2200*1.23),
+(103,3,'2012-03-22',2200,23,2200*1.23),
+(104,1,'2012-10-22',80,23,80*1.23),
+(105,4,'2012-05-22',15,23,15*1.23)
+
+
+Create table #Klient_2NF
+(
+	IDKlient int IDENTITY(1,1),
+	NazwaKlienta nvarchar(100),
+	Adres nvarchar(100),
+	KodPocztowy char(7),
+	Miasto varchar(100),
+	Wojewodztwo varchar(100)	
+)
+
+Insert into #Klient_2NF(NazwaKlienta,Adres,KodPocztowy,Miasto,Wojewodztwo)
+  Values  ('Jan Kowalski','ul. Jana Pawła 12','61-600','Poznań','Wielkopolskie'),
+('Anna Dymna','ul. Staszica 1','30-600','Kraków','Małopolskie'),
+('Piotr Wawrzyniak','al. Niepodległości 1','30-600','Kraków','Małopolskie'),
+('Jan Kowalski','ul. Poznańska 8','21-120','Wrocław','Dolnośląskie')
+
+
+create table #DetaleZamowien_2NF
+(
+	NumerZamowienia int,
+	KodProduktu int,
+	CenaJedn money,
+	Ilosc int
+)
+
+   
+Insert into #DetaleZamowien_2NF( NumerZamowienia, KodProduktu ,CenaJedn ,Ilosc)
+VALUES (101 , 1, 300 , 4),
+(102 , 2, 550 , 4),
+(103 , 2, 550 , 4),
+(104 , 3, 80 , 1),
+(105 , 4, 10 , 1),
+(105 , 5, 5, 1)
+
+
+create table #Produkty_2NF
+(
+	KodProduktu int Identity(1,1),
+	Nazwa varchar(100),
+	Producent varchar(100),
+	CenaJedn money 
+)
+
+Insert into #Produkty_2NF(Nazwa,Producent,CenaJedn)
+Values ('Opony 205 R16','Pirelli',300),
+('Alufelgi Silver','ENZO',550),
+('Opony wymiana',NULL,80),
+('Płyn do spryskiwacza','GreenApple',10),
+('Trójkąt ostrzegawczy','GoSafer',5)
+ 
+ 
+select * from #Zamowienia_2NF
+
+select * from #Klient_2NF
+
+select * from #DetaleZamowien_2NF
+
+select * from #Produkty_2NF
+
+
+-- pokazanie że proces normalizacji również w krou 2 jest bezstratny
+select * from #Zamowienia_1NF
+
+
+select z.NumerZamowienia, k.NazwaKlienta, k.Adres, k.KodPocztowy, k.Miasto, k.Wojewodztwo, z.DataZamowienia, p.Nazwa,
+		d.Ilosc, d.CenaJedn , z.WartZamNetto, z.Vat , z.WartZamBrutto
+from #Zamowienia_2NF z inner join #Klient_2NF k on z.IDKlient=k.IDKlient
+	inner join #DetaleZamowien_2NF d on z.NumerZamowienia=d.NumerZamowienia
+	inner join #Produkty_2NF p on d.KodProduktu=p.KodProduktu
+order by 1
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------
+-- 3NF każdy niekluczowy argument jest bezpośrednio zależny tylko od klucza głównego. Usunięcie kolumn wyliczeniowych (nie zawsze ma to sens)
+------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Create table #Zamowienia_3NF
+(
+	NumerZamowienia  int,
+	IDKlient int,
+	DataZamowienia smalldatetime,
+	WartZamNetto money,
+	WartZamBrutto money
+)
+
+Insert into #Zamowienia_3NF(NumerZamowienia,IDKlient,DataZamowienia, WartZamNetto ,WartZamBrutto )
+Values  (101,1,'2012-01-02',1200, 1476.00 ),
+(102,2,'2012-03-22',2200, 2706.00),
+(103,3,'2012-03-22',2200, 2706.00),
+(104,1,'2012-10-22',80, 98.40),
+(105,4,'2012-05-22',15,18.45)
+
+
+  
+select * from #Zamowienia_UNF
+
+select * from #Zamowienia_1NF
+
+select * from #Zamowienia_2NF
+
+select NumerZamowienia,IDKlient,DataZamowienia,WartZamNetto,WartZamBrutto,
+	((WartZamBrutto/WartZamNetto-1)*100) as [Vat %]
+from #Zamowienia_3NF
+
+/*
+
+
+drop table #Zamowienia_UNF
+drop table #Zamowienia_1NF
+ 
+drop table #Zamowienia_2NF
+drop table #Klient_2NF
+drop table #DetaleZamowien_2NF
+drop table #Produkty_2NF
+drop table #Zamowienia_3NF
+
+*/
+
+
