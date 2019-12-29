@@ -14,7 +14,7 @@ right click on SQL service and then Properties and add -m parametr to SQL Agent
 - connect to SQL server
 
 SQLQuery1
--CREATE TABLE
+- CREATE TABLE
 
 SQLQuery2
 - INSERT INTO
@@ -24,7 +24,7 @@ SQLQuery3
 - WHERE LIKE
 
 SQLQuery4
-Klienci LEFT OUTER JOIN Zamowieni
+- Klienci LEFT OUTER JOIN Zamowieni
 - WHERE IDKlient is Null
 
 SQLQuery5
