@@ -41,3 +41,5 @@ SQLQuery8
 - Produkty UNION ALL Produkty_sklep2
 - source table
 
+SQLQuery9
+- Intersect (UNION)
