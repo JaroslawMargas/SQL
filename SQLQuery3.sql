@@ -15,3 +15,4 @@ dbo.Zamowienia as z
 			Inner Join dbo.Produkty as p
 			On d.KodProduktu = p.KodProduktu
 WHERE k.NazwaKlienta Like 'Anna%'
+

@@ -1,12 +1,12 @@
-Ôªø-- Normalizacja bazy danych
--- Nadmiarowo≈õƒá, anomalie modyfikacji, dodawania / usuwania rekord√≥w
+-- Normalizacja bazy danych
+-- NadmiarowoúÊ, anomalie modyfikacji, dodawania / usuwania rekordÛw
 -- v.1.0 SQLpedia.pl Jakub Kasprzak 2013-01-15
 
 Insert into Klienci (NazwaKlienta,Adres,KodPocztowy,Miasto,Wojewodztwo)
-  Values  ('Jan Kowalski','ul. Jana Paw≈Ça 12','61-600','Pozna≈Ñ','Wielkopolskie'),
-('Anna Dymna','ul. Staszica 1','30-600','Krak√≥w','Ma≈Çopolskie'),
-('Piotr Wawrzyniak','al. Niepodleg≈Ço≈õci 1','30-600','Krak√≥w','Ma≈Çopolskie'),
-('Jan Kowalski','ul. Pozna≈Ñska 8','21-120','Wroc≈Çaw','Dolno≈õlƒÖskie')
+  Values  ('Jan Kowalski','ul. Jana Paw≥a 12','61-600','PoznaÒ','Wielkopolskie'),
+('Anna Dymna','ul. Staszica 1','30-600','KrakÛw','Ma≥opolskie'),
+('Piotr Wawrzyniak','al. Niepodleg≥oúci 1','30-600','KrakÛw','Ma≥opolskie'),
+('Jan Kowalski','ul. PoznaÒska 8','21-120','Wroc≥aw','Dolnoúlπskie'),
 ('Krzys Niezamawialski','ul. Robotnicza 3','11-522','Warszawa','Mazowieckie')
 
 Insert into Zamowienia (NumerZamowienia,IDKlient,DataZamowienia, WartZamNetto ,WartZamBrutto )
@@ -28,6 +28,6 @@ Insert into Produkty (Nazwa,Producent,CenaJedn)
 Values ('Opony 205 R16','Pirelli',300),
 ('Alufelgi Silver','ENZO',550),
 ('Opony wymiana',NULL,80),
-('P≈Çyn do spryskiwacza','GreenApple',10),
-('Tr√≥jkƒÖt ostrzegawczy','GoSafer',5),
+('P≥yn do spryskiwacza','GreenApple',10),
+('TrÛjkπt ostrzegawczy','GoSafer',5),
 ('Choika pachnaca','Wunder Baum',7)
