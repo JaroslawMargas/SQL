@@ -13,4 +13,31 @@ right click on SQL service and then Properties and add -m parametr to SQL Agent
 - Run MSSQL Management Studio As administrator
 - connect to SQL server
 
+SQLQuery1
+-CREATE TABLE
+
+SQLQuery2
+- INSERT INTO
+
+SQLQuery3
+- Zamowienia INNER JOIN DetaleZamowien INNER JOIN Klienci 
+- WHERE LIKE
+
+SQLQuery4
+Klienci LEFT OUTER JOIN Zamowieni
+- WHERE IDKlient is Null
+
+SQLQuery5
+- Produkty  FULL OUTER JOIN DetaleZamowien
+- Where KodProduktu is null or KodProduktu is null
+
+SQLQuery6 
+- CREATE TABLE Produkty_sklep2 for test UNION
+
+SQLQuery7
+- Insert into Produkty_sklep2 for test UNION
+
+SQLQuery8
+- Produkty UNION ALL Produkty_sklep2
+- source table
 
