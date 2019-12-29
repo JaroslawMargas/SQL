@@ -7,6 +7,7 @@ Insert into Klienci (NazwaKlienta,Adres,KodPocztowy,Miasto,Wojewodztwo)
 ('Anna Dymna','ul. Staszica 1','30-600','Kraków','Małopolskie'),
 ('Piotr Wawrzyniak','al. Niepodległości 1','30-600','Kraków','Małopolskie'),
 ('Jan Kowalski','ul. Poznańska 8','21-120','Wrocław','Dolnośląskie')
+('Krzys Niezamawialski','ul. Robotnicza 3','11-522','Warszawa','Mazowieckie')
 
 Insert into Zamowienia (NumerZamowienia,IDKlient,DataZamowienia, WartZamNetto ,WartZamBrutto )
 Values  (101,1,'2012-01-02',1200, 1476.00 ),
@@ -28,4 +29,5 @@ Values ('Opony 205 R16','Pirelli',300),
 ('Alufelgi Silver','ENZO',550),
 ('Opony wymiana',NULL,80),
 ('Płyn do spryskiwacza','GreenApple',10),
-('Trójkąt ostrzegawczy','GoSafer',5)
+('Trójkąt ostrzegawczy','GoSafer',5),
+('Choika pachnaca','Wunder Baum',7)
