@@ -64,5 +64,11 @@ SQLQuery13 and 14
 SQLQuery15
 - Substring, CHARINDEX, LEN (Result: N.Surname)
 
-SQLQuery6
+SQLQuery16
 - Substring & PatIndex
+
+SQLQuery17
+- COUNT(1)
+- ROW_NUMBER()
+- DENSE_RANK()
+- RANK()
