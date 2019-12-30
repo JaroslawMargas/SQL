@@ -63,3 +63,6 @@ SQLQuery13 and 14
 
 SQLQuery15
 - Substring, CHARINDEX, LEN (Result: N.Surname)
+
+SQLQuery6
+- Substring & PatIndex
