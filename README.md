@@ -43,3 +43,11 @@ SQLQuery8
 
 SQLQuery9
 - Intersect (UNION)
+
+SQLQuery10
+- FROM 
+- WHERE  
+- GROUP BY 
+- HAVING 
+- SELECT 
+- SELECT aggregate functions
