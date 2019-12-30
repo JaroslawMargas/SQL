@@ -57,3 +57,6 @@ SQLQuery11
 
 SQLQuery12
 - LIKE, BETWEEN, IN , ANY (SELECT) vs ALL (SELECT)
+
+SQLQuery13 and 14
+- Insert Into and GROUP BY WITH TIES
