@@ -60,3 +60,6 @@ SQLQuery12
 
 SQLQuery13 and 14
 - Insert Into and GROUP BY WITH TIES
+
+SQLQuery15
+- Substring, CHARINDEX, LEN (Result: N.Surname)
